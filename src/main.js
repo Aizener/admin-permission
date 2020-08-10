@@ -8,6 +8,7 @@ import Api from './api'
 import './mock'
 import { MessageBox, Message } from 'element-ui'
 import 'animate.css'
+import './directive/permission'
 
 Vue.config.productionTip = false
 Vue.prototype.$api = Api

@@ -4,36 +4,41 @@
       background-color="#00BFFF"
       text-color="#fff"
     >
-      <el-submenu class="nav-title" index="1">
+      <el-submenu v-for="(item, idx) in menus" :key="idx" class="nav-title" :index="String(idx)">
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
+          <span slot="title">{{ item.authName }}</span>
         </template>
-        <el-menu-item @click="$router.push('/menu/1')">菜单栏1</el-menu-item>
-        <el-menu-item @click="$router.push('/menu/2')">菜单栏2</el-menu-item>
-        <el-menu-item @click="$router.push('/menu/3')">菜单栏3</el-menu-item>
-      </el-submenu>
-      <el-submenu class="nav-title" index="2">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">导航二</span>
-        </template>
-        <el-menu-item @click="$router.push('/menu/4')">菜单栏4</el-menu-item>
-        <el-menu-item @click="$router.push('/menu/5')">菜单栏5</el-menu-item>
+        <el-menu-item v-for="(item, idx) in item.children" :key="idx" @click="$router.push({ path: item.path, query: { name: item.authName }})">{{ item.authName }}</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
 </template>
 
 <script>
-export default {
+import { mapState } from 'vuex'
 
+export default {
+  data () {
+    return {
+      menus: []
+    }
+  },
+  computed: {
+    ...mapState(['user'])
+  },
+  mounted () {
+    this.menus = this.user.rights
+  }
 }
 </script>
 
 <style lang="less" scoped>
 .nav-title {
   & /deep/ i {
+    color: #fff;
+  }
+  .el-menu-item {
     color: #fff;
   }
 }

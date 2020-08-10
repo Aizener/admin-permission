@@ -27,6 +27,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import { initDynamicRouter } from '@/router'
 
 export default {
   data () {
@@ -65,12 +66,31 @@ export default {
               return false
             }
             this.setUser(res.data)
+            initDynamicRouter()
+            sessionStorage.setItem('v-user', JSON.stringify(res.data))
+            sessionStorage.setItem('v-encryp', encodeURIComponent(JSON.stringify(res.data)))
             this.$router.push('/')
           })
         }
         return false
       })
+    },
+    notifyError () {
+      const message = this.$route.query.message
+      if (message) {
+        this.$message({
+          message,
+          type: 'warning'
+        })
+      }
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.notifyError()
+    next()
+  },
+  created () {
+    this.notifyError()
   }
 }
 </script>

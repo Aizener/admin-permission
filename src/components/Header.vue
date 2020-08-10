@@ -4,7 +4,7 @@
       <div class="header-left__logo">
         <img src="@/assets/logo.png" alt="">
       </div>
-      <div class="header-left__title">后台管理系统权限Demo</div>
+      <div class="header-left__title">后台管理系统权限Demo实现</div>
     </div>
     <div class="header-right">
       <div class="header-right__info">
@@ -29,6 +29,7 @@ export default {
         type: 'warning'
       }).then(() => {
         setTimeout(() => {
+          sessionStorage.clear()
           this.$router.push('/login')
           window.location.reload()
         }, 500)
