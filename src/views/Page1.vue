@@ -180,10 +180,12 @@ export default {
     }
   },
   created () {
-    this.addBread({
-      name: '菜单栏' + this.$route.params.id,
-      path: this.$route.path
-    })
+    if (this.$route.query.name) {
+      this.addBread({
+        name: this.$route.query.name,
+        path: this.$route.path
+      })
+    }
     this.initData()
   },
   components: {
