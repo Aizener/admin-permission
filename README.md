@@ -23,7 +23,7 @@
 
 4. 实现模板：
 
-   基础模板在`master`分支， 可以通过`checkout develop`来切换；
+   基础模板在`master`分支， 可以通过`git checkout master`来切换；
 
 5. 启动服务
 
